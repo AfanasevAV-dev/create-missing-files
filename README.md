@@ -2,7 +2,7 @@
 
 Create missing files from imports with one click.
 
-![Demo](demo.gif)
+![Demo](https://raw.githubusercontent.com/AfanasevAV-dev/create-missing-files/main/demo.gif)
 
 ## How it works
 
