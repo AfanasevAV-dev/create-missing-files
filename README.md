@@ -18,8 +18,22 @@ A "Create File" button appears above any missing import.
 
 ### Settings
 
-- `createMissingFiles.autoCreate` - Create files without asking (default: off)
-- `createMissingFiles.extensions` - Which file types to watch (default: .scss, .css, .js, .ts, .jsx, .tsx, .json, .vue)
+- `createMissingFiles.autoCreate` - Auto-create files without asking (default: off)
+- `createMissingFiles.extensions` - File extensions to watch (default: .scss, .css, .js, .ts, .jsx, .tsx, .json, .vue)
+- `createMissingFiles.aliases` - Short path aliases (e.g. `{"@": "./src"}` turns `@/components/Button` into `./src/components/Button`)
+
+#### Aliases
+
+Add path aliases in VS Code settings:
+
+```json
+"createMissingFiles.aliases": {
+  "@": "./src",
+  "~": "./"
+}
+```
+
+Then imports like `import Button from '@/components/Button'` will work.
 
 ## Supports
 
