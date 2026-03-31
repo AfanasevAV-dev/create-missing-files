@@ -9,6 +9,9 @@ const IMPORT_PATTERNS = [
   /@import\s+['"]([^'"]+\.(?:scss|css|sass|less|js|ts|jsx|tsx|json|vue))['"]/g,
 ];
 
+const translate = (ru: string, en: string) =>
+  vscode.env.language.startsWith("ru") ? ru : en;
+
 export function activate(context: vscode.ExtensionContext) {
   console.log("Create Missing Files is now active!");
 
@@ -33,8 +36,8 @@ export function activate(context: vscode.ExtensionContext) {
 
             if (filePath && !fs.existsSync(filePath)) {
               const hoverContent = new vscode.MarkdownString(
-                `**${importPath}** does not exist.\n\n` +
-                  `[✨ Create File](command:create-missing-files.createFile?${encodeURIComponent(
+                `**${importPath}** ${translate("не существует", "does not exist")}.\n\n` +
+                  `[✨ ${translate("Создать файл", "Create File")}](command:create-missing-files.createFile?${encodeURIComponent(
                     JSON.stringify({ filePath, importPath }),
                   )})`,
               );
@@ -64,15 +67,17 @@ export function activate(context: vscode.ExtensionContext) {
 
         let shouldCreate = autoCreate;
 
+        const alwaysCreateLabel = translate("Всегда создавать автоматически", "Always create automatically");
+
         if (!autoCreate) {
           const action = await vscode.window.showWarningMessage(
-            `"${importPath}" does not exist. Create?`,
+            `"${importPath}" ${translate("не существует. Создать?", "does not exist. Create?")}`,
             "Yes",
             "No",
-            "Always create automatically",
+            alwaysCreateLabel,
           );
 
-          if (action === "Always create automatically") {
+          if (action === alwaysCreateLabel) {
             await config.update(
               "autoCreate",
               true,
@@ -116,7 +121,7 @@ export function activate(context: vscode.ExtensionContext) {
               const range = new vscode.Range(startPos, endPos);
 
               const codeLens = new vscode.CodeLens(range, {
-                title: "✨ Create File",
+                title: `✨ ${translate("Создать файл", "Create File")}`,
                 command: "create-missing-files.createFile",
                 arguments: [{ filePath, importPath }],
               });
@@ -154,7 +159,7 @@ async function createFile(filePath: string, importPath: string) {
   }
 
   await fs.promises.writeFile(filePath, "");
-  vscode.window.showInformationMessage(`✅ Created: ${importPath}`);
+  vscode.window.showInformationMessage(`✅ ${translate("Создано:", "Created:")} ${importPath}`);
 
   const document = await vscode.workspace.openTextDocument(filePath);
   await vscode.window.showTextDocument(document);
