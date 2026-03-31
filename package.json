@@ -1,0 +1,59 @@
+{
+  "name": "create-missing-files",
+  "displayName": "Create Missing Files",
+  "description": "Quickly create missing files referenced in imports",
+  "version": "1.0.0",
+  "publisher": "AfanasevAV",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AfanasevAV-dev/create-missing-files.git"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact",
+    "onLanguage:vue",
+    "onLanguage:html"
+  ],
+  "main": "./out/create-missing-files.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "create-missing-files.createFile",
+        "title": "Create Missing Files",
+        "category": "Create Missing Files"
+      }
+    ],
+    "configuration": {
+      "title": "Create Missing Files",
+      "properties": {
+        "createMissingFiles.extensions": {
+          "type": "array",
+          "default": [".scss", ".css", ".js", ".ts", ".jsx", ".tsx", ".json", ".vue"],
+          "description": "File extensions to watch in imports"
+        },
+        "createMissingFiles.autoCreate": {
+          "type": "boolean",
+          "default": false,
+          "description": "Auto-create files without confirmation"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "package": "npm run compile && mkdir dist 2>nul & vsce package --out dist/"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "@vscode/vsce": "^2.22.0",
+    "typescript": "^5.0.0"
+  }
+}
