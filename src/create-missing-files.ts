@@ -13,7 +13,7 @@ const translate = (ru: string, en: string) =>
   vscode.env.language.startsWith("ru") ? ru : en;
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log("Create Missing Files is now active!");
+  console.log(`Create Missing Files is now active! (locale: ${vscode.env.language})`);
 
   const hoverProvider = vscode.languages.registerHoverProvider(
     [

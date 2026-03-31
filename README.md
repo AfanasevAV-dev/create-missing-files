@@ -2,6 +2,8 @@
 
 Create missing files from imports with one click.
 
+![Demo](demo.gif)
+
 ## How it works
 
 When you import a file that doesn't exist, this extension shows a quick action to create it.
