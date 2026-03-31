@@ -149,20 +149,6 @@ function getFullPath(
     const dir = path.dirname(document.uri.fsPath);
     return path.join(dir, importPath);
   }
-
-  const config = vscode.workspace.getConfiguration("createMissingFiles");
-  const aliases = config.get<Record<string, string>>("aliases", {});
-  const workspaceFolder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath;
-
-  for (const [alias, target] of Object.entries(aliases)) {
-    if (!workspaceFolder) break;
-    
-    if (importPath.startsWith(alias + "/") || importPath === alias) {
-      const relativePath = importPath.slice(alias.length + 1);
-      return path.join(workspaceFolder, target, relativePath);
-    }
-  }
-
   return null;
 }
 

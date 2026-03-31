@@ -2,7 +2,7 @@
   "name": "create-missing-files",
   "displayName": "Create Missing Files",
   "description": "Quickly create missing files referenced in imports",
-  "version": "1.0.5",
+  "version": "1.0.4",
   "publisher": "AfanasevAV",
   "icon": "images/icon.png",
   "repository": {
